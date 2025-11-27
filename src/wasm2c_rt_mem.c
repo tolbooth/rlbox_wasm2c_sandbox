@@ -165,7 +165,8 @@ wasm_rt_memory_t create_wasm2c_memory(uint32_t initial_pages,
 
   wasm_rt_memory_t ret;
   ret.data = data;
-  ret.page_size = WASM_PAGE_SIZE;
+  // We remove `page_size` field access since this is not present in wabt's
+  // `wasm_rt_memory_t` (and WASM page size is constant)
   ret.pages = initial_pages;
   ret.max_pages = chosen_max_pages;
   ret.size = byte_length;
